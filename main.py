@@ -2,6 +2,7 @@ import sys
 import time
 import logging
 import watchdog
+import subprocess
 from selenium import webdriver
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
@@ -12,6 +13,7 @@ from selenium.webdriver.firefox.options import Options
 driver_path = 'C:/Users/MYN/bin/geckodriver.exe'
 driver = None
 my_url = 'http://localhost:9000'
+php_source_path = 'C:/Users/MYN/Desktop/lab/learn-php/'
 
 def reload_browser():
     global driver
@@ -29,8 +31,7 @@ class MyHandler(PatternMatchingEventHandler):
 
 if __name__ == "__main__":
 
-    path = 'C:/Users/MYN/Desktop/lab/learn-php/'
-
+    path = php_source_path
     patterns = ['*.php']
     event_handler = MyHandler(patterns=patterns)
     observer = Observer()
