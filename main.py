@@ -10,12 +10,12 @@ from watchdog.events import PatternMatchingEventHandler
 from selenium.webdriver.firefox.options import Options
 
 
-driver_path = 'C:/Users/MYN/bin/geckodriver.exe'
+driver_path = '/Users/myn/Downloads/geckodriver'
 driver = None
 my_url = 'http://localhost:9000'
-php_source_path = 'C:/Users/MYN/Desktop/lab/learn-php/'
 
 def reload_browser():
+    print('loading the URL')
     global driver
     if (driver == None):
         driver = webdriver.Firefox(options=Options(), executable_path=driver_path)
@@ -30,16 +30,16 @@ class MyHandler(PatternMatchingEventHandler):
         reload_browser()
 
 if __name__ == "__main__":
-
-    path = php_source_path
-    patterns = ['*.php']
-    event_handler = MyHandler(patterns=patterns)
+    path = '/Users/myn/Desktop/lab/php-learn/'
+    event_handler = MyHandler()
     observer = Observer()
     observer.schedule(event_handler, path, recursive=False)
+    print('starting observer')
     observer.start()
     try:
         while True:
             time.sleep(1)
     except KeyboardInterrupt:
+        print('eroror')
         observer.stop()
     observer.join()
